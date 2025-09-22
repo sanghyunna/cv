@@ -117,22 +117,23 @@
       <!-- end Projects -->
       {% endif %}
 
-      {% if site.resume_section_skills %}
-      <!-- begin Skills -->
+      {% if site.resume_section_publications or site.resume_section_skills %}
+      <!-- begin Publications (formerly Skills) -->
       <section class="content-section">
 
         <header class="section-header">
-          <h2>Skills</h2>
+          <h2>Publications</h2>
         </header>
-        {% for skill in site.data.skills %}
+        {% for pub in site.data.publications %}
         <div class="resume-item">
-          <h4 class="resume-item-details">{{ skill.skill }}</h4>
-          <p class="resume-item-copy">{{ skill.description }}</p>
+          <!-- Expected fields: title, venue, year, summary (fallback to older fields) -->
+          <h4 class="resume-item-details">{% if pub.title %}{{ pub.title }}{% else %}{{ pub.skill }}{% endif %}</h4>
+          <p class="resume-item-copy">{% if pub.summary %}{{ pub.summary }}{% else %}{{ pub.description }}{% endif %}</p>
         </div>
         {% endfor %}
 
       </section>
-      <!-- end Skills -->
+      <!-- end Publications -->
       {% endif %}
 
       {% if site.resume_section_recognition %}
